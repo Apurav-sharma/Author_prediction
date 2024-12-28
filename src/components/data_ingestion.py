@@ -26,8 +26,8 @@ class DataIngestion:
         try:
             logging.info("Data has been taken as dataFrame")
 
-            df_train = pd.read_csv("projects\\Author_prediction\\notebook\data\\avila-tr.txt")
-            df_test = pd.read_csv("projects\\Author_prediction\\notebook\data\\avila-ts.txt")
+            df_train = pd.read_csv("notebook\\data\\avila-tr.txt")
+            df_test = pd.read_csv("notebook\\data\\avila-ts.txt")
 
             os.makedirs(os.path.dirname(self.ingestionConfig.train_data_path), exist_ok=True)
 
