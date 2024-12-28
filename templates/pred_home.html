@@ -1,0 +1,67 @@
+<html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<body>
+    <div class="container">
+        <h2 class="mt-5">Enter the Required Attributes for Prediction</h2>
+        <form action="{{url_for('predict')}}" method="POST">
+            <div class="form-group">
+                <label for="intercolumnar_distance">Intercolumnar Distance:</label>
+                <input type="" class="form-control" id="intercolumnar_distance" name="intercolumnar_distance" required>
+            </div>
+
+            <div class="form-group">
+                <label for="upper_margin">Upper Margin:</label>
+                <input type="" class="form-control" id="upper_margin" name="upper_margin" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lower_margin">Lower Margin:</label>
+                <input type="" class="form-control" id="lower_margin" name="lower_margin" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exploitation">Exploitation:</label>
+                <input type="" class="form-control" id="exploitation" name="exploitation" required>
+            </div>
+
+            <div class="form-group">
+                <label for="row_number">Row Number:</label>
+                <input type="" class="form-control" id="row_number" name="row_number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modular_ratio">Modular Ratio:</label>
+                <input type="" class="form-control" id="modular_ratio" name="modular_ratio" step="any" required>
+            </div>
+
+            <div class="form-group">
+                <label for="interlinear_spacing">Interlinear Spacing:</label>
+                <input type="" class="form-control" id="interlinear_spacing" name="interlinear_spacing" step="any"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight:</label>
+                <input type="" class="form-control" id="weight" name="weight" required>
+            </div>
+
+            <div class="form-group">
+                <label for="peak_number">Peak Number:</label>
+                <input type="" class="form-control" id="peak_number" name="peak_number" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <h1>
+            The Author is : {{prediction}}
+        </h1>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
