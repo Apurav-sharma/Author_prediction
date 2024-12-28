@@ -36,8 +36,8 @@ class ModelTraining:
                 # "SVM": SVC(kernel='linear'),
                 # "KNN": KNeighborsClassifier(n_neighbors=5),
                 # "Naive Bayes": GaussianNB(),
-                # "XGBClassifier": XGBClassifier(),
-                # "CatBoostClassifier": CatBoostClassifier(verbose=False),
+                "XGBClassifier": XGBClassifier(),
+                "CatBoostClassifier": CatBoostClassifier(verbose=False),
                 "AdaBoostClassifier": AdaBoostClassifier(n_estimators=100),
                 # "GradientBoostingClassifier": GradientBoostingClassifier(n_estimators=100)
             }
@@ -73,16 +73,16 @@ class ModelTraining:
                 # "Naive Bayes": {
                 #     "var_smoothing": [1e-9, 1e-7]
                 # },
-                # "XGBClassifier": {
-                #     "n_estimators": [100, 200],
-                #     "learning_rate": [0.01, 0.1],
-                #     "max_depth": [3, 6]
-                # },
-                # "CatBoostClassifier": {
-                #     "iterations": [100, 200],
-                #     "learning_rate": [0.01, 0.1],
-                #     "depth": [6, 8]
-                # },
+                "XGBClassifier": {
+                    "n_estimators": [100, 200],
+                    "learning_rate": [0.01, 0.1],
+                    "max_depth": [3, 6]
+                },
+                "CatBoostClassifier": {
+                    "iterations": [100, 200],
+                    "learning_rate": [0.01, 0.1],
+                    "depth": [6, 8]
+                },
                 "AdaBoostClassifier": {
                     "n_estimators": [50, 100],
                     "learning_rate": [0.01, 0.1]
