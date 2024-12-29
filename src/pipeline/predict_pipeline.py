@@ -47,7 +47,6 @@ class CustomData:
 
     def get_data_frame(self):
         try:
-            
             custom_data = {
                 "intercolumnar_distance": [self.intercolumnar_distance],
                 "upper_margin": [self.upper_margin],
