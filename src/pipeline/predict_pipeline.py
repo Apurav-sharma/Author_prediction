@@ -4,7 +4,6 @@ from src.exception import CustomExcep
 from src.utils import load_obj
 import pandas as pd
 import joblib
-from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
 
@@ -17,7 +16,7 @@ class PredictPipeline:
 
             model_path = 'artifact\model.pkl'
             preprocessor_path = 'artifact\preprocessor.pkl'
-            
+
 
             model = load_obj(model_path)
             preprocessor = load_obj(preprocessor_path)
