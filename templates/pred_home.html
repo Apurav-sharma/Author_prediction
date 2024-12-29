@@ -1,62 +1,114 @@
-<html>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+
+        label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        input.form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        input.form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #007bff;
+        }
+    </style>
+</head>
 
 <body>
     <div class="container">
-        <h2 class="mt-5">Enter the Required Attributes for Prediction</h2>
+        <h2>Enter the Required Attributes for Prediction</h2>
         <form action="{{url_for('predict')}}" method="POST">
             <div class="form-group">
                 <label for="intercolumnar_distance">Intercolumnar Distance:</label>
-                <input type="" class="form-control" id="intercolumnar_distance" name="intercolumnar_distance" required>
+                <input type="number" class="form-control" id="intercolumnar_distance" name="intercolumnar_distance" required>
             </div>
 
             <div class="form-group">
                 <label for="upper_margin">Upper Margin:</label>
-                <input type="" class="form-control" id="upper_margin" name="upper_margin" required>
+                <input type="number" class="form-control" id="upper_margin" name="upper_margin" required>
             </div>
 
             <div class="form-group">
                 <label for="lower_margin">Lower Margin:</label>
-                <input type="" class="form-control" id="lower_margin" name="lower_margin" required>
+                <input type="number" class="form-control" id="lower_margin" name="lower_margin" required>
             </div>
 
             <div class="form-group">
                 <label for="exploitation">Exploitation:</label>
-                <input type="" class="form-control" id="exploitation" name="exploitation" required>
+                <input type="number" class="form-control" id="exploitation" name="exploitation" required>
             </div>
 
             <div class="form-group">
                 <label for="row_number">Row Number:</label>
-                <input type="" class="form-control" id="row_number" name="row_number" required>
+                <input type="number" class="form-control" id="row_number" name="row_number" required>
             </div>
 
             <div class="form-group">
                 <label for="modular_ratio">Modular Ratio:</label>
-                <input type="" class="form-control" id="modular_ratio" name="modular_ratio" step="any" required>
+                <input type="number" class="form-control" id="modular_ratio" name="modular_ratio" step="any" required>
             </div>
 
             <div class="form-group">
                 <label for="interlinear_spacing">Interlinear Spacing:</label>
-                <input type="" class="form-control" id="interlinear_spacing" name="interlinear_spacing" step="any"
-                    required>
+                <input type="number" class="form-control" id="interlinear_spacing" name="interlinear_spacing" step="any" required>
             </div>
 
             <div class="form-group">
                 <label for="weight">Weight:</label>
-                <input type="" class="form-control" id="weight" name="weight" required>
+                <input type="number" class="form-control" id="weight" name="weight" required>
             </div>
 
             <div class="form-group">
                 <label for="peak_number">Peak Number:</label>
-                <input type="" class="form-control" id="peak_number" name="peak_number" required>
+                <input type="number" class="form-control" id="peak_number" name="peak_number" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
-        <h1>
-            The Author is : {{prediction}}
-        </h1>
+        <h1>The Author is: {{prediction}}</h1>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

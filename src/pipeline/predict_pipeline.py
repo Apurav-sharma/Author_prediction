@@ -24,12 +24,6 @@ class PredictPipeline:
 
             data_scaled = preprocessor.transform(features)
 
-            mean = np.mean(data_scaled)
-            std = np.std(data_scaled)
-
-            data_scaled = (data_scaled - mean) / std
-            
-            print(data_scaled)
             res = model.predict(data_scaled)
             return res
 
