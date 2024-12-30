@@ -47,6 +47,7 @@ class CustomData:
 
     def get_data_frame(self):
         try:
+            # Create a dictionary with the data attributes
             custom_data = {
                 "intercolumnar_distance": [self.intercolumnar_distance],
                 "upper_margin": [self.upper_margin],
@@ -60,7 +61,9 @@ class CustomData:
                 "modular_ratio_by_interlinear_spacing": [self.modular_ratio_by_interlinear_spacing]
             }
 
+            # Convert the dictionary to a pandas DataFrame
             return pd.DataFrame(custom_data)
 
         except Exception as e:
+            # Raise a custom exception if an error occurs
             raise CustomExcep(e, sys)
