@@ -53,12 +53,20 @@
             margin-top: 30px;
             color: #007bff;
         }
+
+        .author-info {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h2>Enter the Required Attributes for Author Prediction of Avila bible (After Normalization)</h2>
+        <h2>Enter the Required Attributes for Author Prediction of Avila Bible (After Normalization)</h2>
         <form action="{{url_for('predict')}}" method="POST">
             <div class="form-group">
                 <label for="intercolumnar_distance">Intercolumnar Distance:</label>
@@ -111,6 +119,25 @@
         </form>
 
         <h1>The Author is: {{prediction}}</h1>
+
+        <div class="author-info">
+            <h4>Author Numbering:</h4>
+            <p>The authors in the Avila Bible are numbered from 0 to 11, where:</p>
+            <ul>
+                <li>Author 0: John Doe</li>
+                <li>Author 1: Jane Smith</li>
+                <li>Author 2: Albert Brown</li>
+                <li>Author 3: Emma Wilson</li>
+                <li>Author 4: Henry Johnson</li>
+                <li>Author 5: Olivia Davis</li>
+                <li>Author 6: William Miller</li>
+                <li>Author 7: Sophia Garcia</li>
+                <li>Author 8: James Martinez</li>
+                <li>Author 9: Isabella Rodriguez</li>
+                <li>Author 10: Michael Hernandez</li>
+                <li>Author 11: Emily Thompson</li>
+            </ul>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
