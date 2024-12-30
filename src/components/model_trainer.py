@@ -1,117 +1,80 @@
 from src.exception import CustomExcep
 from src.logger import logging
 
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import classification_report
 import os, sys
 from dataclasses import dataclass
 from catboost import CatBoostClassifier
-from xgboost import XGBClassifier
-
 from src.utils import save_object, evaluate_model
 
 
 @dataclass
 class ModelTrainingConfig:
+    """
+    Configuration class for model training.
+    Stores the file path where the trained model will be saved.
+    """
     model_file_path = os.path.join("artifact", "model.pkl")
 
 
 class ModelTraining:
+    """
+    Class to handle the training of machine learning models.
+    """
     def __init__(self):
         self.modelConfig = ModelTrainingConfig()
     
     def initiate_model_training(self, train_arr, test_arr):
+        """
+        Initiates the model training process.
+
+        Args:
+            train_arr (np.ndarray): Training data array with features and target.
+            test_arr (np.ndarray): Testing data array with features and target.
+
+        Returns:
+            str: Classification report for the best selected model.
+
+        Raises:
+            CustomExcep: For any exception that occurs during the process.
+        """
         try:
             logging.info("Model Training has started")
 
+            # Define the models to train
             models = {
-                # "Logistic Regression": LogisticRegression(),
-                # "Decision Tree": DecisionTreeClassifier(),
-                "Random Forest": RandomForestClassifier(n_estimators=100),
-                # "SVM": SVC(kernel='linear'),
-                # "KNN": KNeighborsClassifier(n_neighbors=5),
-                # "Naive Bayes": GaussianNB(),
-                "XGBClassifier": XGBClassifier(),
                 "CatBoostClassifier": CatBoostClassifier(verbose=False),
-                "AdaBoostClassifier": AdaBoostClassifier(n_estimators=100),
-                # "GradientBoostingClassifier": GradientBoostingClassifier(n_estimators=100)
             }
 
+            # Define hyperparameters for GridSearchCV (if needed)
             hyperparameters = {
-                # "Logistic Regression": {
-                #     "C": [0.1, 1, 10],
-                #     "solver": ["liblinear", "lbfgs"],
-                #     "max_iter": [100, 200]
-                # },
-                # "Decision Tree": {
-                #     "max_depth": [3, 5, 10],
-                #     "min_samples_split": [2, 5, 10],
-                #     "min_samples_leaf": [1, 2, 5],
-                #     "criterion": ["gini", "entropy"]
-                # },
-                "Random Forest": {
-                    "n_estimators": [100, 200],
-                    "max_depth": [3, 5, 10],
-                    # "min_samples_split": [2, 5],
-                    "min_samples_leaf": [1, 2],
-                    "criterion": ["gini", "entropy"]
-                },
-                # "SVM": {
-                #     "C": [0.1, 1, 10],
-                #     "kernel": ["rbf"]
-                # },
-                # "KNN": {
-                #     "n_neighbors": [5, 7],
-                #     "weights": ["uniform", "distance"],
-                #     "algorithm": ["auto", "ball_tree", "brute"]
-                # },
-                # "Naive Bayes": {
-                #     "var_smoothing": [1e-9, 1e-7]
-                # },
-                "XGBClassifier": {
-                    "n_estimators": [100, 200],
-                    "learning_rate": [0.01, 0.1],
-                    "max_depth": [3, 6]
-                },
                 "CatBoostClassifier": {
                     "iterations": [100, 200],
                     "learning_rate": [0.01, 0.1],
                     "depth": [6, 8]
-                },
-                "AdaBoostClassifier": {
-                    "n_estimators": [50, 100],
-                    "learning_rate": [0.01, 0.1]
-                },
-                # "GradientBoostingClassifier": {
-                #     "n_estimators": [100, 200],
-                #     "learning_rate": [0.01, 0.1],
-                #     "max_depth": [3, 5]
-                # }
+                }
             }
 
+            # Split the data into features and target
             X_train, X_test, y_train, y_test = (
-                train_arr[:, :-1],
-                test_arr[:, :-1],
-                train_arr[:, -1],
-                test_arr[:, -1]
+                train_arr[:, :-1],  # Training features
+                test_arr[:, :-1],   # Testing features
+                train_arr[:, -1],   # Training target
+                test_arr[:, -1]     # Testing target
             )
 
-            logging.info("Data is splitted for training and testing")
+            logging.info("Data is split for training and testing")
 
-            model_report:dict = evaluate_model(X_train, X_test, y_train, y_test, models = models, params = hyperparameters)
+            # Evaluate models and get their performance
+            model_report: dict = evaluate_model(X_train, X_test, y_train, y_test, models=models, params=hyperparameters)
 
-            logging.info("Training of model has executed")
+            logging.info("Training of models has been executed")
 
+            # Select the best model based on performance
             best_model = ""
             best_score = 0
-
             for key, value in model_report.items():
-                if(value > best_score):
+                if value > best_score:
                     best_score = value
                     best_model = key
 
@@ -119,14 +82,20 @@ class ModelTraining:
 
             logging.info("Best Model has been selected")
 
+            # Fit the best model on the training data
+            selected_model.fit(X_train, y_train)
+
+            # Save the trained model to a file
             save_object(obj=selected_model, file_path=self.modelConfig.model_file_path)
 
+            # Make predictions on the test data
             y_pred = selected_model.predict(X_test)
-            logging.info("Model prediction for model has done")
+            logging.info("Model prediction for test data is done")
 
+            # Generate and return a classification report
             report = classification_report(y_test, y_pred)
-            logging.info("Classification report for model has done")
-            print(selected_model)
+            logging.info("Classification report for the model is completed")
+            print(report)
 
             return report
 
