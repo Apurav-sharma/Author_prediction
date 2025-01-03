@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from src.pipeline.predict_pipeline import PredictPipeline, CustomData
 from src.exception import CustomExcep
 import sys
+import os
 
 app = Flask(__name__)
 
@@ -41,4 +42,6 @@ def predict():
             raise CustomExcep(e, sys)
     
 if __name__ == '__main__':
-    app.run()
+    # Use the PORT environment variable or default to 5000
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
